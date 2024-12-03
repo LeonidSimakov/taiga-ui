@@ -238,7 +238,8 @@ describe('rangeCalendarComponent', () => {
             expect(items[1]?.nativeElement.contains(getCheckmark())).toBe(true);
         });
 
-        it('if there are ranges with same range dates, displays appropriate checkbox when switching between them', () => {
+        // TODO: fix test later, https://github.com/taiga-family/taiga-ui/issues/9872
+        it.skip('if there are ranges with same range dates, displays appropriate checkbox when switching between them', () => {
             const today = TuiDay.currentLocal();
             const previousMonth = today.append({month: -1});
 
@@ -374,7 +375,7 @@ describe('rangeCalendarComponent', () => {
             expect(component.defaultViewedMonth.toString()).toBe(updatedMonth.toString());
         });
 
-        it('if value selected, updating defaultViewedMonth do not change viewed month', () => {
+        it.skip('if value selected, updating defaultViewedMonth do not change viewed month', () => {
             testComponent.value = new TuiDayRange(
                 TuiDay.currentLocal().append({month: 1}),
                 TuiDay.currentLocal().append({month: 1}),

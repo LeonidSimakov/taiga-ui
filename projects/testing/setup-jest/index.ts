@@ -1,4 +1,5 @@
 /// <reference types="jest" />
+import {afterAll, beforeAll} from '@jest/globals';
 import {tuiSwitchNgDevMode} from '@taiga-ui/testing/mocks';
 import {setupZoneTestEnv} from 'jest-preset-angular/setup-env/zone';
 
@@ -142,6 +143,27 @@ class TransferMockEvent {
 
 global.DragEvent = TransferMockEvent as unknown as typeof DragEvent;
 global.ClipboardEvent = TransferMockEvent as unknown as typeof ClipboardEvent;
+
+class OriginalDate extends Date {}
+
+const fakeTime = '2023-02-15T00:00:00Z';
+const fakeNow = new Date(fakeTime).getTime();
+
+class MockDate extends Date {
+    constructor(...args: DateConstructor[]) {
+        // @ts-ignore
+        super(...(args.length === 0 ? [fakeTime] : args));
+    }
+}
+
+beforeAll(() => {
+    global.Date = MockDate as unknown as DateConstructor;
+    global.Date.now = () => fakeNow;
+});
+
+afterAll(() => {
+    global.Date = OriginalDate as unknown as DateConstructor;
+});
 
 /**
  * in our jest setupFilesAfterEnv file,

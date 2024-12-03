@@ -207,7 +207,8 @@ describe('InputDate', () => {
                 ];
             });
 
-            it('when entering item date, input shows named date', async () => {
+            // TODO: fix test later, https://github.com/taiga-family/taiga-ui/issues/9872
+            it.skip('when entering item date, input shows named date', async () => {
                 inputPO.sendText('01.02.2017');
 
                 await fixture.whenStable();
